@@ -1,18 +1,21 @@
+import sys
+input = sys.stdin.readline
 while True:
-    x = int(input())
-    if x == -1:
+    N = int(input())
+    if N == -1:
         break
-    num = []
-    N = 0
-    for i in range(1, x):
-        if x % i == 0:
-            num.append(i)
-    if sum(num) == x:
-        print(f"{x} = ", end='')
-        for i in range(len(num)):
-            if i == len(num) - 1:
-                print(num[i])
+    M = [1]
+    X = 2
+    while N > X:
+        if N % X == 0:
+            M.append(X)
+        X += 1
+    if sum(M) == N:
+        print(f"{N} = ", end='')
+        for i in M:
+            if i == M[-1]:
+                print(i)
             else:
-                print(f"{num[i]} + ", end='')
+                print(f"{i} + ", end='')
     else:
-        print(f"{x} is NOT perfect.")
+        print(f"{N} is NOT perfect.")
