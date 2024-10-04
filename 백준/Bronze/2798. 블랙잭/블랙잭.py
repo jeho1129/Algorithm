@@ -1,21 +1,21 @@
 import sys
-input = sys.stdin.readline
 
+input = sys.stdin.readline
 N, M = map(int, input().split())
-num = list(map(int, input().split()))
-x = 0
+S = list(map(int, input().split()))
 result = 0
-for i in range(N):
-    result += num[i]
-    for j in range(N):
-        if i != j:
-            result += num[j]
-            for k in range(N):
-                if i != k and j != k:
-                    result += num[k]
-                    if x < result <= M:
-                        x = result
-                    result -= num[k]
-            result -= num[j]
-    result -= num[i]
-print(x)
+
+
+def combinations(n, new_arr, c):
+    global result
+    # 순서 상관 X, 중복 X
+    if len(new_arr) == n:
+        if result < sum(new_arr) <= M:
+            result = sum(new_arr)
+        return
+    for i in range(c, len(S)):
+        combinations(n, new_arr + [S[i]], i + 1)
+
+
+combinations(3, [], 0)
+print(result)
